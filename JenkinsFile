@@ -50,6 +50,10 @@ pipeline {
         stage('Run NotesApp') {
             steps {
                 script {
+                    bat "docker container stop frontend-container"
+                    bat "docker container stop backend-container"
+                    bat "docker container rm frontend-container"
+                    bat "docker container rm frontend-container"
                     bat "docker-compose up -d --build"
                 }
             }
