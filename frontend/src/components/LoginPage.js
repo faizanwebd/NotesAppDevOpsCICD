@@ -63,7 +63,7 @@ function LoginPage({ setLoading }) {
           </button>
         </form>
         <p onClick={() => setIsLogin(!isLogin)} style={{ cursor: 'pointer', marginTop: '10px' }}>
-          {isLogin ? 'Need an account? Register' : 'Already have an account? Login'}
+          {isLogin ? 'Need an account? Register LOL NOOB' : 'Already have an account? Login'}
         </p>
       </div>
     </div>
