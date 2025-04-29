@@ -25,8 +25,8 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    bat "docker build -t gauravjhagk/frontend:latest ./frontend"
-                    bat "docker build -t gauravjhagk/backend:latest ./backend"
+                    bat "docker build -t faizanwebd/frontend:latest ./frontend"
+                    bat "docker build -t faizanwebd/backend:latest ./backend"
                 }
             }
         }
@@ -42,8 +42,8 @@ pipeline {
         stage('Push Docker Images') {
             steps {
                 script {
-                    bat "docker push gauravjhagk/frontend:latest"
-                    bat "docker push gauravjhagk/backend:latest"
+                    bat "docker push faizanwebd/frontend:latest"
+                    bat "docker push faizanwebd/backend:latest"
                 }
             }
         }
@@ -58,4 +58,3 @@ pipeline {
         }
     }
 }
-
