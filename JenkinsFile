@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+    }
+
+    stages {
+        stage('Set Git Config') {
+            steps {
+                bat 'git config --global core.autocrlf input'
+                bat 'git config --global core.safecrlf warn'
+                bat 'git config --global i18n.commitEncoding utf-8'
+                bat 'git config --global i18n.logOutputEncoding utf-8'
+            }
+        }
+
+        stage('Checkout Code') {
+            steps {
+                bat 'git version'
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Images') {
+            steps {
+                script {
+                    bat "docker build -t gauravjhagk/frontend:latest ./frontend"
+                    bat "docker build -t gauravjhagk/backend:latest ./backend"
+                }
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                script {
+                    bat "docker login -u %DOCKERHUB_CREDENTIALS_USR% -p %DOCKERHUB_CREDENTIALS_PSW%"
+                }
+            }
+        }
+
+        stage('Push Docker Images') {
+            steps {
+                script {
+                    bat "docker push gauravjhagk/frontend:latest"
+                    bat "docker push gauravjhagk/backend:latest"
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and Push Successful!'
+        }
+        failure {
+            echo 'Build or Push Failed.'
+        }
+    }
+}
+
