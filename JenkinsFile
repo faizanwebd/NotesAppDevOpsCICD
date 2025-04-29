@@ -50,7 +50,7 @@ pipeline {
         stage('Run NotesApp') {
             steps {
                 script {
-                    bat "docker-compose up"
+                    bat "docker-compose up -d --build"
                 }
             }
         }
