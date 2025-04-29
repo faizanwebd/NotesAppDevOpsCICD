@@ -47,6 +47,13 @@ pipeline {
                 }
             }
         }
+        stage('Run NotesApp') {
+            steps {
+                script {
+                    bat "docker-compose up"
+                }
+            }
+        }
     }
 
     post {
